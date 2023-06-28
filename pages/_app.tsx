@@ -26,11 +26,11 @@ const providers = [
       switch (chain.id) {
         case 1:
           return {
-            http: "https://eth-mainnet.g.alchemy.com/v2/ZuYcmtAsk-Cpoq9CSnRJIUsNeXPxSS2v",
+            http: "https://eth-mainnet.g.alchemy.com/v2/ZuYcmtAsk-Cpoq9CSnRJIUsNeXPxSS2v", // demo only
           };
         case 137:
           return {
-            http: "https://polygon-mainnet.g.alchemy.com/v2/2ZulmRPm8Kklt6G--5tqJn50WOP5lQCt",
+            http: "https://polygon-mainnet.g.alchemy.com/v2/2ZulmRPm8Kklt6G--5tqJn50WOP5lQCt", // demo only
           };
         default:
           return null;
@@ -42,7 +42,7 @@ const providers = [
 
 const { chains, provider } = configureChains(SUPPORTED_CHAINS, providers);
 
-const projectId = "79ca859045a661287f06fcf4b8aa3ecf";
+const projectId = "79ca859045a661287f06fcf4b8aa3ecf"; // demo only
 
 const connectors = connectorsForWallets([
   {
