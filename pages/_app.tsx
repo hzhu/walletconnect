@@ -1,14 +1,13 @@
 import "@/styles/globals.css";
+import { useEffect, useState } from "react";
+import { mainnet, polygon } from "wagmi/chains";
+import { ConnectButton, RainbowKitProvider } from "@rainbow-me/rainbowkit";
 import type { AppProps } from "next/app";
-import { ConnectButton } from '@rainbow-me/rainbowkit';
 
 import "@rainbow-me/rainbowkit/styles.css";
 
-import { getDefaultWallets, RainbowKitProvider } from "@rainbow-me/rainbowkit";
 import { configureChains, createClient, WagmiConfig, type Chain } from "wagmi";
 
-import { mainnet, polygon, optimism, arbitrum } from "wagmi/chains";
-import { alchemyProvider } from "wagmi/providers/alchemy";
 import { publicProvider } from "wagmi/providers/public";
 import { jsonRpcProvider } from "wagmi/providers/jsonRpc";
 import {
@@ -18,7 +17,7 @@ import {
 } from "@rainbow-me/rainbowkit/wallets";
 import { connectorsForWallets } from "@rainbow-me/rainbowkit";
 
-export const SUPPORTED_CHAINS: Chain[] = [mainnet, polygon, arbitrum];
+export const SUPPORTED_CHAINS: Chain[] = [mainnet, polygon];
 
 const providers = [
   jsonRpcProvider({
@@ -63,6 +62,9 @@ const wagmiClient = createClient({
 });
 
 export default function App({ Component, pageProps }: AppProps) {
+  const [mounted, setMounted] = useState(false);
+  useEffect(() => setMounted(true), []);
+
   return (
     <div>
       <WagmiConfig client={wagmiClient}>
@@ -74,7 +76,7 @@ export default function App({ Component, pageProps }: AppProps) {
             }}
           >
             <ConnectButton />
-            <Component {...pageProps} />
+            {mounted && <Component {...pageProps} />}
           </RainbowKitProvider>
         </RainbowKitProvider>
       </WagmiConfig>
